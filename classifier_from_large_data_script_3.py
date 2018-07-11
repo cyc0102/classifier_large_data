@@ -119,3 +119,5 @@ model.fit_generator(
     validation_steps=nb_validation_samples // batch_size,
     verbose=2)
 
+
+model.save('model_3.h5')  # creates a HDF5 file 'model_3.h5'
