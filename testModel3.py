@@ -3,8 +3,8 @@ from keras.preprocessing.image import ImageDataGenerator
 
 # dimensions of our images.
 img_width, img_height = 150, 150
-test_data_dir = 'data/test'
-nb_validation_samples = 800
+test_data_dir = 'data/test1'
+nb_validation_samples = 200
 batch_size = 16
 
 test_datagen = ImageDataGenerator(rescale=1. / 255)
