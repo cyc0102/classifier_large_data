@@ -5,7 +5,7 @@ from keras.preprocessing.image import ImageDataGenerator
 img_width, img_height = 150, 150
 test_data_dir = 'data/test1'
 nb_validation_samples = 200
-batch_size = 16
+batch_size = 1
 
 test_datagen = ImageDataGenerator(rescale=1. / 255)
 test_data = test_datagen.flow_from_directory(
