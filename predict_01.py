@@ -58,4 +58,5 @@ for i in range (batch_size):
     x = x.astype('float32') / 255.0
     x_4d[i]=x 
 prediction=model.predict(x_4d)
+prediction=np.rint(prediction)
 print('The prediction value is', prediction[:10])
