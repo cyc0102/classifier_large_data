@@ -3,7 +3,7 @@ This is a demo python program to demo python and the important module for Image 
 
 
 Author: Bryan Chen
-
+1
 '''
 from keras.models import load_model
 
@@ -30,18 +30,8 @@ print(x.dtype)
 x = x.astype('float32') / 255.0
 
 
-import matplotlib.pyplot as plt 
-fig = plt.gcf()
-fig.set_size_inches(5, 6)
-plt.imshow(x)             # RGB type 0~255 int or 0~1 float
-title= 'Input Image:'
-plt.text(30,170,'Image file path:'+Img_path,fontsize=10)
-plt.title(title,fontsize=15)
-plt.show()
-
 x1=x.reshape(1,150,150,3)
 print('Image after Reshape = ', x1.shape)
-
 
 
 prediction=model.predict(x1)
@@ -52,10 +42,37 @@ else:
     print('It is a cat image!')  
 
 prediction=np.rint(prediction)
+print(prediction)
+print(prediction.shape)
+print(prediction.dtype)
+prediction=prediction.astype(int)
+print(prediction)
+print(prediction.shape)
+print(prediction.dtype)
+print('prediction[0]=',prediction[0])
+label_dict={0:'cat', 1:'Dog'}
+
+import matplotlib.pyplot as plt 
+
+def plot_a_image(image,title,result):
+    fig = plt.gcf()
+    fig.set_size_inches(5, 6)
+    plt.imshow(x)             # RGB type 0~255 int or 0~1 float
+    plt.title(title,fontsize=12)
+    plt.text(20,170,'The prediction result --> '+ result,fontsize=15)
+    plt.show()
 
 
+in_title='input Image:' + Img_path  
+
+i=prediction[0]
+i=int(i)
+in_result=label_dict[i]
+print(in_result)
+plot_a_image(x,in_title,in_result)
 
 
+'''
 import numpy as np
 x_4d=np.zeros((10,150,150,3),dtype=float)  # create 4 dimention ndarray with elements of zero
 print('Dimmentions =',x_4d.ndim) 
@@ -74,3 +91,4 @@ for i in range (batch_size):
 prediction=model.predict(x_4d)
 prediction=np.rint(prediction)
 print('The prediction value is', prediction[:10])
+'''
