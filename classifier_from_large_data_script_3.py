@@ -1,8 +1,4 @@
-'''This script goes along the blog post
-"Building powerful image classification models using very little data"
-from blog.keras.io.
-It uses data that can be downloaded at:
-https://www.kaggle.com/c/dogs-vs-cats/data
+'''
 In our setup, we:
 - created a data/ folder
 - created train/ and validation/ subfolders inside data/
