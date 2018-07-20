@@ -8,8 +8,8 @@ Author: Bryan Chen
 
 
 import numpy as np
-
-i=10
+i_str=input('Input Image (index:1~12500);')
+i=int(i_str)
 Img_path = 'data/test2/'+str(i)+'.jpg'
 print (Img_path)
 
