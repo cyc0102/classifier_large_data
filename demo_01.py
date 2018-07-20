@@ -9,6 +9,7 @@ from keras.models import load_model
 
 # 載入模型
 model = load_model('model_3.h5') # trained by large data
+model.summary()  #print model summary
 
 import numpy as np
 i_str=input('Input Image (index:1~12500):')
