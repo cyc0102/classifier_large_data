@@ -8,7 +8,7 @@ Author: Bryan Chen
 
 
 import numpy as np
-i_str=input('Input Image (index:1~12500);')
+i_str=input('Input Image (index:1~12500):')
 i=int(i_str)
 Img_path = 'data/test2/'+str(i)+'.jpg'
 print (Img_path)
@@ -22,12 +22,15 @@ x = img_to_array(img)    # this is a Numpy array with shape ( Y, X , 3)
 print(x.shape)
 print(x.dtype)
 x = x.astype('float32') / 255.0
-print(x.dtype)
+
 
 import matplotlib.pyplot as plt 
 fig = plt.gcf()
 fig.set_size_inches(10, 5)
 plt.imshow(x)             # RGB type 0~255 int or 0~1 float
+title= 'Input Image:'
+# plt.text(50,-10,title,fontsize=18)
+plt.title(title,fontsize=15)
 plt.show()
 
 x1=x.reshape(1,150,150,3)
