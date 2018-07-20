@@ -5,18 +5,23 @@ This is a demo python program to demo python and the important module for Image 
 Author: Bryan Chen
 
 '''
+from keras.models import load_model
 
+# 載入模型
+model = load_model('model_3.h5') # trained by large data
 
 import numpy as np
 i_str=input('Input Image (index:1~12500):')
 i=int(i_str)
 Img_path = 'data/test2/'+str(i)+'.jpg'
-print (Img_path)
+print('Imge file path:',Img_path)
 
 from keras.preprocessing.image import  img_to_array, load_img
 img_org = load_img(Img_path) # PIL image
+print('The original image!')
 img_org.show()
 img = load_img(Img_path,target_size=(150,150)) # PIL image
+print('The target_size image')
 img.show()
 x = img_to_array(img)    # this is a Numpy array with shape ( Y, X , 3)
 print(x.shape)
@@ -26,27 +31,29 @@ x = x.astype('float32') / 255.0
 
 import matplotlib.pyplot as plt 
 fig = plt.gcf()
-fig.set_size_inches(10, 5)
+fig.set_size_inches(5, 6)
 plt.imshow(x)             # RGB type 0~255 int or 0~1 float
 title= 'Input Image:'
-# plt.text(50,-10,title,fontsize=18)
+plt.text(30,170,'Image file path:'+Img_path,fontsize=10)
 plt.title(title,fontsize=15)
 plt.show()
 
 x1=x.reshape(1,150,150,3)
-print('Reshape = ', x1.shape)
+print('Image after Reshape = ', x1.shape)
 
 
-from keras.models import load_model
 
-# 載入模型
-model = load_model('model_3.h5') # trained by large data
 prediction=model.predict(x1)
 print('The prediction value is', prediction[0])
 if (prediction[0] > 0.5):  
     print('It is a dog image!')
 else:
     print('It is a cat image!')  
+
+prediction=np.rint(prediction)
+
+
+
 
 import numpy as np
 x_4d=np.zeros((10,150,150,3),dtype=float)  # create 4 dimention ndarray with elements of zero
