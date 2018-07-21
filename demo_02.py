@@ -3,7 +3,7 @@ This is a demo python program to demo python and the important module for Image 
 
 
 Author: Bryan Chen
-1
+
 '''
 from keras.models import load_model
 import numpy as np
