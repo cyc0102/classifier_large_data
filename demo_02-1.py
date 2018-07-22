@@ -19,7 +19,7 @@ def plot_a_image(image,title,result):
         fig.set_size_inches(5, 6)
         plt.imshow(x)             # RGB type 0~255 int or 0~1 float
         plt.title(title,fontsize=12)
-        plt.text(20,170,'The prediction result --> '+ result,fontsize=15)
+        plt.text(20,170,'The prediction result --> '+ result,fontsize=15,bbox=dict(facecolor='#ffff00',alpha=0.5))
         plt.show()
 
 while 1:
