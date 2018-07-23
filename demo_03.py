@@ -14,6 +14,8 @@ import matplotlib.pyplot as plt
 model = load_model('model_3.h5') # trained by large data
 model.summary()  #print model summary
 
+label_dict={0:'cat', 1:'dog'}
+
 def plot_a_image(image,title,result):
         fig = plt.gcf()
         fig.set_size_inches(5, 6)       # set size
@@ -62,7 +64,7 @@ while 1:
     print('prediction.shape=',prediction.shape)
     print('prediction.dtype=',prediction.dtype)
     print('prediction[0]=',prediction[0])
-    label_dict={0:'cat', 1:'dog'}
+   
 
     in_title='input Image:' + Img_path  
 
@@ -75,23 +77,45 @@ while 1:
     plot_a_image(x,in_title,in_result)
 
 
-'''
-import numpy as np
-x_4d=np.zeros((10,150,150,3),dtype=float)  # create 4 dimention ndarray with elements of zero
-print('Dimmentions =',x_4d.ndim) 
-# x_4d[0]=x
-# print(x_4d)
 
-index_str= input('Input the first index(1~12490) of test image :') #input is a str
-batch_size = 10
-for i in range (batch_size):
-    index= int(index_str) + i # transfer index type to int and plus i (0~9)
-    Img_path = 'data/test2/'+ str(index)  +'.jpg'
-    img = load_img(Img_path,target_size=(150,150)) 
-    x = img_to_array(img)    # this is a Numpy array with shape ( Y, X , 3)
-    x = x.astype('float32') / 255.0
-    x_4d[i]=x 
-prediction=model.predict(x_4d)
-prediction=np.rint(prediction)
-print('The prediction value is', prediction[:10])
-'''
+batch_size = 12
+x_4d=np.zeros((batch_size,150,150,3),dtype=float)  # create 4 dimention ndarray with elements of zero
+print('x_4d.shape=',x_4d.shape)
+print('x_4d.ndim =',x_4d.ndim) 
+
+def plot_12_images(images,prediction):
+    fig = plt.gcf()
+    fig.set_size_inches(12,12)
+    for i in range(batch_size):
+        ax=plt.subplot(3,4,i+1)
+        ax.imshow(images[i])
+        index=int(index_str)+i
+        title='Index=' + str(index) +' ' +'Result=' + label_dict[int(prediction[i])]
+        ax.set_title(title,fontsize = 10)
+        ax.set_xticks([])
+        ax.set_yticks([])
+    plt.show()
+
+
+batch_size = 12
+while 1:
+    index_str= input('Input Images  (index:1~12489, batch_size=12, out of range for exit):') #input is a str
+    index=int(index_str)
+    if (index<1 or index>12489):
+        break
+
+    for i in range (batch_size):
+        
+        Img_path = 'data/test2/'+ str(index)  +'.jpg'
+        img = load_img(Img_path,target_size=(150,150)) 
+        x = img_to_array(img)    # this is a Numpy array with shape ( Y, X , 3)
+        x = x.astype('float32') / 255.0
+        x_4d[i]=x 
+        index= index +1 
+    
+    prediction=model.predict(x_4d)
+    prediction=np.rint(prediction)
+    print('The prediction value is', prediction[:batch_size])
+    plot_12_images(x_4d,prediction)
+
+
