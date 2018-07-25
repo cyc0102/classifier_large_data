@@ -5,14 +5,14 @@ This is a demo python program to demo python and the important module for Image 
 Author: Bryan Chen
 
 '''
-from keras.models import load_model
+from keras.models import load_model     # from module keras.models import load_model
 import numpy as np
 from keras.preprocessing.image import  img_to_array, load_img
 import matplotlib.pyplot as plt 
 
 # 載入模型
-model = load_model('model_3.h5') # trained by large data
-model.summary()  #print model summary
+model = load_model('model_3.h5')        # trained by large data
+model.summary()                         #print model summary
 
 label_dict={0:'cat', 1:'dog'}
 

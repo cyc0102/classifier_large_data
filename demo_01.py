@@ -3,7 +3,7 @@ This is a demo python program to demo python and the important module for Image 
 
 
 Author: Bryan Chen
-1
+
 '''
 from keras.models import load_model
 
@@ -11,7 +11,6 @@ from keras.models import load_model
 model = load_model('model_3.h5') # trained by large data
 model.summary()  #print model summary
 
-import numpy as np
 i_str=input('Input Image (index:1~12500):')
 i=int(i_str)
 Img_path = 'data/test2/'+str(i)+'.jpg'
@@ -41,6 +40,7 @@ if (prediction[0] > 0.5):
 else:
     print('It is a cat image!')  
 
+import numpy as np
 prediction=np.rint(prediction)
 print(prediction)
 print(prediction.shape)
