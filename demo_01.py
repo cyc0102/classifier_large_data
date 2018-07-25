@@ -8,31 +8,30 @@ Author: Bryan Chen
 from keras.models import load_model
 
 # 載入模型
-model = load_model('model_3.h5') # trained by large data
-model.summary()  #print model summary
+model = load_model('model_3.h5')                    # trained by large data
+model.summary()                                     # print model summary
 
-i_str=input('Input Image (index:1~12500):')
-i=int(i_str)
-Img_path = 'data/test2/'+str(i)+'.jpg'
-print('Imge file path:',Img_path)
-
+# 輸入檔案
+i_str=input('Input Image (index:1~200):')           # Input type is string 
+i=int(i_str)                                        # change type to int
+if (i<1 or i>200):
+    exit()
+Img_path = 'data/test3/'+str(i)+'.jpg'
+print('Image file path:',Img_path)
 from keras.preprocessing.image import  img_to_array, load_img
-img_org = load_img(Img_path) # PIL image
-print('The original image!')
-img_org.show()
-img = load_img(Img_path,target_size=(150,150)) # PIL image
-print('The target_size image')
-img.show()
-x = img_to_array(img)    # this is a Numpy array with shape ( Y, X , 3)
-print(x.shape)
-print(x.dtype)
-x = x.astype('float32') / 255.0
+img_org = load_img(Img_path)                        # PIL image
+img_org.show()                                      # show the original PIL image
+img = load_img(Img_path,target_size=(150,150))      # PIL image, targetz_size for above model
 
-
+# 將image file轉換為CNN 輸入格式
+x = img_to_array(img)                               # a Numpy array with shape ( Y, X , 3)
+print('x.shpae=',x.shape)                           # (150,150,3)
+print('x.dtype=',x.dtype)
+x = x / 255.0                                       # normalize
 x1=x.reshape(1,150,150,3)
 print('Image after Reshape = ', x1.shape)
 
-
+# 執行預測
 prediction=model.predict(x1)
 print('The prediction value is', prediction[0])
 if (prediction[0] > 0.5):  
@@ -40,17 +39,18 @@ if (prediction[0] > 0.5):
 else:
     print('It is a cat image!')  
 
+
 import numpy as np
 prediction=np.rint(prediction)
-print(prediction)
+print('np.rint(prediction)=',prediction)
 print(prediction.shape)
 print(prediction.dtype)
 prediction=prediction.astype(int)
 print(prediction)
-print(prediction.shape)
 print(prediction.dtype)
 print('prediction[0]=',prediction[0])
-label_dict={0:'cat', 1:'Dog'}
+
+label_dict={0:'Cat', 1:'Dog'}
 
 import matplotlib.pyplot as plt 
 
