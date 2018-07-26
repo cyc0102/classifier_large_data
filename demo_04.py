@@ -19,8 +19,8 @@ Img_path=fileopenbox()
 print('Image file path:',Img_path)
 
 from keras.preprocessing.image import  img_to_array, load_img
-img_org = load_img(Img_path)                        # PIL image
-img_org.show()                                      # show the original PIL image
+#img_org = load_img(Img_path)                        # PIL image
+#img_org.show()                                      # show the original PIL image
 img = load_img(Img_path,target_size=(150,150))      # PIL image, targetz_size for above model
 
 # 將image file轉換為CNN 輸入格式
