@@ -39,56 +39,37 @@ if (prediction[0] > 0.5):
 else:
     print('It is a cat image!')  
 
-
+# 輸出格式轉換
 import numpy as np
-prediction=np.rint(prediction)
-print('np.rint(prediction)=',prediction)
-print(prediction.shape)
-print(prediction.dtype)
+prediction=np.rint(prediction)                     # transfer ndarray item to nearest int
+print('np.rint(prediction)=',prediction)           
+print('prediction.shape=',prediction.shape)
+print('prediction.dtype=',prediction.dtype)
 prediction=prediction.astype(int)
-print(prediction)
-print(prediction.dtype)
+print('prediction=',prediction)
+print('prediction.dtype=',prediction.dtype)
 print('prediction[0]=',prediction[0])
+i=prediction[0]
+print('i=',i)
+print('i.shape=',i.shape)
+print('i.dtype=',i.dtype)
+i=int(i)                                           # transfer ndarray to python int
+print('int(i)=',i,'type(i)=',type(i))
+label_dict={0:'Cat', 1:'Dog'}                      # dictionary {key: value,...}    
+in_result=label_dict[i]                            # value = dict[key]
+print('in_result=',in_result)
 
-label_dict={0:'Cat', 1:'Dog'}
-
+# 以圖形輸出結果
 import matplotlib.pyplot as plt 
-
 def plot_a_image(image,title,result):
     fig = plt.gcf()
     fig.set_size_inches(5, 6)
-    plt.imshow(x)             # RGB type 0~255 int or 0~1 float
+    plt.imshow(x)                                   # RGB type 0~255 int or 0~1 float
     plt.title(title,fontsize=12)
     plt.text(20,170,'The prediction result --> '+ result,fontsize=15)
     plt.show()
 
-
 in_title='input Image:' + Img_path  
-
-i=prediction[0]
-i=int(i)
-in_result=label_dict[i]
-print(in_result)
 plot_a_image(x,in_title,in_result)
 
 
-'''
-import numpy as np
-x_4d=np.zeros((10,150,150,3),dtype=float)  # create 4 dimention ndarray with elements of zero
-print('Dimmentions =',x_4d.ndim) 
-# x_4d[0]=x
-# print(x_4d)
-
-index_str= input('Input the first index(1~12490) of test image :') #input is a str
-batch_size = 10
-for i in range (batch_size):
-    index= int(index_str) + i # transfer index type to int and plus i (0~9)
-    Img_path = 'data/test2/'+ str(index)  +'.jpg'
-    img = load_img(Img_path,target_size=(150,150)) 
-    x = img_to_array(img)    # this is a Numpy array with shape ( Y, X , 3)
-    x = x.astype('float32') / 255.0
-    x_4d[i]=x 
-prediction=model.predict(x_4d)
-prediction=np.rint(prediction)
-print('The prediction value is', prediction[:10])
-'''
