@@ -14,8 +14,7 @@ model.summary()                                     # print model summary
 
 #GUI for image input
 from easygui import fileopenbox, msgbox
-msgbox('Select an image file in data directory')
-Img_path=fileopenbox()
+Img_path=fileopenbox(msg='Select an image file...',title='Image Recognition',default='./data/test3/*.jpg')
 print('Image file path:',Img_path)
 
 from keras.preprocessing.image import  img_to_array, load_img
