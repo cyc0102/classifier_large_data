@@ -1,4 +1,4 @@
-'''
+﻿'''
 This is a demo python program to demo python and the important module for Image Recogniton using CNN
 
 
@@ -11,6 +11,7 @@ from keras.preprocessing.image import  img_to_array, load_img
 import matplotlib.pyplot as plt 
 
 # 載入模型
+
 model = load_model('model_3.h5')        # trained by large data
 model.summary()                         #print model summary
 
