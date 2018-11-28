@@ -2,3 +2,5 @@
 
 *.jpg
 *.npy
+data/validation.zip
+data/train.zip
